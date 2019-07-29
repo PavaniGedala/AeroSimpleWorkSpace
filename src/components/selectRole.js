@@ -1,18 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './common.css';
-import {db} from './firebase';
 import { BrowserRouter as Router, Route,withRouter } from 'react-router-dom';
 
-class ChatChannel extends React.Component {
+class RoleSelectPage extends React.Component {
+    getRole(e){
+        sessionStorage.setItem('role',e);
+        this.props.history.push("/selectAirport")
+    }
     render(){
         return (
             <div className="chatChannel">
-                Channel Page
+                Select Role
+                <select onChange={(e)=>this.getRole(e)}>
+                    <option value="employee">Employee</option>
+                </select>
             </div>
         );
     }
-
 }
 
-export default ChatChannel;
+export default RoleSelectPage;
