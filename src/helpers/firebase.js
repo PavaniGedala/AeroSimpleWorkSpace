@@ -5,24 +5,24 @@ import * as firebase from 'firebase'
 
 const settings = {timestampsInSnapshots: true};
 
-// const config = {
-//     apiKey: "AIzaSyBipYtnYP7-KV7DsDJw1fktNbWlUJWYgLg",
-//     authDomain: "aerosimple-246605.firebaseapp.com",
-//     databaseURL: "https://aerosimple-246605.firebaseio.com",
-//     projectId: "aerosimple-246605",
-//     storageBucket: "aerosimple-246605.appspot.com",
-//     messagingSenderId: "227510545239",
-//     appId: "1:227510545239:web:7fa82dc9f4d543c9"
-// }
-const config={
-    apiKey: "AIzaSyBQUqbXRnKSdR6Tbp5eWSmrrw-k-IRHaqE",
-        authDomain: "fir-8dae4.firebaseapp.com",
-    databaseURL: "https://fir-8dae4.firebaseio.com",
-    projectId: "fir-8dae4",
-    storageBucket: "fir-8dae4.appspot.com",
-    messagingSenderId: "895354415465",
-    appId: "1:895354415465:web:757d30c87c939d1d"
+const config = {
+    apiKey: "AIzaSyBipYtnYP7-KV7DsDJw1fktNbWlUJWYgLg",
+    authDomain: "aerosimple-246605.firebaseapp.com",
+    databaseURL: "https://aerosimple-246605.firebaseio.com",
+    projectId: "aerosimple-246605",
+    storageBucket: "aerosimple-246605.appspot.com",
+    messagingSenderId: "227510545239",
+    appId: "1:227510545239:web:7fa82dc9f4d543c9"
 }
+// const config={
+//     apiKey: "AIzaSyBQUqbXRnKSdR6Tbp5eWSmrrw-k-IRHaqE",
+//         authDomain: "fir-8dae4.firebaseapp.com",
+//     databaseURL: "https://fir-8dae4.firebaseio.com",
+//     projectId: "fir-8dae4",
+//     storageBucket: "fir-8dae4.appspot.com",
+//     messagingSenderId: "895354415465",
+//     appId: "1:895354415465:web:757d30c87c939d1d"
+// }
 
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
