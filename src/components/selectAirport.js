@@ -3,6 +3,7 @@ import React from 'react';
 import './common.css';
 
 import { BrowserRouter as Router, Route,withRouter } from 'react-router-dom';
+import {db} from "../helpers/firebase";
 
 class AirportSelectPage extends React.Component {
 
@@ -14,6 +15,19 @@ class AirportSelectPage extends React.Component {
                 }
             ]
 
+    }
+    constructor(props){
+        super(props);
+        db.collection("airports")
+            .onSnapshot(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => {
+                    return  {
+                        data:doc.data(),
+                        id:doc.id
+                    }
+                });
+               this.setState({airports:data})
+            });
     }
     getAirport(e){
         sessionStorage.setItem('airport',e);
@@ -27,7 +41,7 @@ class AirportSelectPage extends React.Component {
                     {
                         this.state.airports.map((data,index)=>{
                          return {
-                             <option value={data.airportName}>{data.airportName}</option>
+                             <option value={data.id}>{data.data.airportName}</option>
                          }
                         })
                     }
