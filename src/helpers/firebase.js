@@ -12,7 +12,7 @@ const config = {
     projectId: "aerosimple-246605",
     storageBucket: "aerosimple-246605.appspot.com",
     messagingSenderId: "227510545239",
-    appId: "1:227510545239:web:7fa82dc9f4d543c9"
+    appId: "1:227510545239:web:94a03d13cf772963"
 }
 // const config={
 //     apiKey: "AIzaSyBQUqbXRnKSdR6Tbp5eWSmrrw-k-IRHaqE",
@@ -24,9 +24,8 @@ const config = {
 //     appId: "1:895354415465:web:757d30c87c939d1d"
 // }
 
-if (!firebase.apps.length) {
     firebase.initializeApp(config);
-}
+
 
 export const registerUser=function(email,password,callback){
     firebase

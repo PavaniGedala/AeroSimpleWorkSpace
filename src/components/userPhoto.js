@@ -1,18 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './common.css';
-import {db} from './firebase';
-import { BrowserRouter as Router, Route,withRouter } from 'react-router-dom';
 
-class UserPhoto extends React.Component {
-    render(){
+class GetUserPhoto extends React.Component {
+    state={
+        disabled:true
+    }
+    constructor(props) {
+        super(props);
+    }
+
+    changeFile=(e)=>{
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            sessionStorage.setItem('photo',reader.result);
+            this.setState({disabled:false})
+
+        };
+    }
+
+    continue(){
+        this.props.history.push("/selectEmail")
+    }
+
+    render() {
         return (
             <div className="chatChannel">
-                Channel Page
+                <input type="file" onChange={(e)=>this.changeFile(e)}/>
+                <a onClick={this.continue}>skip</a>
+                <button disabled={this.state.disabled} onClick={this.continue}>Continue</button>
             </div>
-        );
+        )
     }
 
 }
 
-export default UserPhoto;
+
+export default GetUserPhoto;

@@ -1,18 +1,18 @@
 import React from 'react';
 import './common.css';
 
-class GetUserName extends React.Component {
+class GetEmail extends React.Component {
     constructor(props) {
         super(props);
     }
 
     changeText=(e)=>{
         console.log(e.target.value)
-        sessionStorage.setItem('userName',e.target.value)
+        sessionStorage.setItem('email',e.target.value)
 
     }
-    continue(){
-        this.props.history.push("/selectPhoto")
+    continue=()=>{
+        this.props.history.push("/selectPassword")
     }
     render() {
         return (
@@ -26,4 +26,4 @@ class GetUserName extends React.Component {
 }
 
 
-export default GetUserName;
+export default GetEmail;

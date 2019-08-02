@@ -9,10 +9,6 @@ class AirportSelectPage extends React.Component {
 
     state={
         airports: [
-                {
-                    'id':'AJSJAJAS-asmkams',
-                    'airportName':''
-                }
             ]
 
     }
@@ -26,11 +22,15 @@ class AirportSelectPage extends React.Component {
                         id:doc.id
                     }
                 });
+                console.log(data)
                this.setState({airports:data})
             });
     }
     getAirport(e){
-        sessionStorage.setItem('airport',e);
+        sessionStorage.setItem('airport',e.target.value);
+
+    }
+    continue=()=>{
         this.props.history.push("/selectRole")
     }
     render(){
@@ -38,15 +38,19 @@ class AirportSelectPage extends React.Component {
             <div className="chatChannel">
                 Select Airport
                 <select onChange={(e)=>this.getAirport(e)}>
+                    <option value=''>Select Aiport</option>
                     {
                         this.state.airports.map((data,index)=>{
-                         return {
-                             <option value={data.id}>{data.data.airportName}</option>
-                         }
+                         return (
+                             <option key={index} value={data.id}>{data.data.airportName}</option>
+                         )
+
                         })
+
                     }
 
                 </select>
+                <button onClick={this.continue}>Next</button>
             </div>
         );
     }

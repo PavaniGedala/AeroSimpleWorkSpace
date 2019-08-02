@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {db} from './firebase';
+import {db} from './helpers/firebase';
 import { BrowserRouter as Router, Route,withRouter } from 'react-router-dom';
 import intro from './components/intro';
 import Login from './components/login';
@@ -9,6 +9,10 @@ import ChannelChat from './components/channelChat';
 import DirectChat from "./components/directChat";
 import RoleSelectPage from './components/selectRole';
 import AirportSelectPage from './components/selectAirport';
+import GetUserName from "./components/userName";
+import GetUserPhoto from "./components/userPhoto";
+import GetEmail from "./components/selectEmail";
+import GetPassword from "./components/getPassword";
 
 class App extends React.Component {
 
@@ -30,7 +34,10 @@ class App extends React.Component {
                 <Route exact path="/directChat" component={DirectChat} />
                 <Route exact path="/selectRole" component={RoleSelectPage} />
                 <Route exact path="/selectAirport" component={AirportSelectPage} />
-
+                <Route exact path="/selectPhoto" component={GetUserPhoto}/>
+                <Route exact path="/selectUserName" component={GetUserName}/>
+                <Route exact path="/selectEmail" component={GetEmail}/>
+                <Route exact path="/selectPassword" component={GetPassword}/>
                 {/*<Route exact path="/chat" component={Chat} />*/}
             </Router>
         </div>
