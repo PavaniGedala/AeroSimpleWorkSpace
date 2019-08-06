@@ -7,14 +7,17 @@ import {userAuth} from '../helpers/firebase';
 class ChatChannel extends React.Component {
     constructor(props){
         super(props)
-        userAuth(function(userData){
-                console.log(userData)
-        })
+
+    }
+
+    createChannel=()=>{
+        this.props.history.push('/createChannel');
     }
     render(){
         return (
             <div className="chatChannel">
                 Channel Chat Page
+                <button onClick={this.createChannel}>create channel</button>
             </div>
         );
     }

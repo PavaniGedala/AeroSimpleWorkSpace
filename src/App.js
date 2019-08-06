@@ -13,6 +13,8 @@ import GetUserName from "./components/userName";
 import GetUserPhoto from "./components/userPhoto";
 import GetEmail from "./components/selectEmail";
 import GetPassword from "./components/getPassword";
+import CreateChannel from './components/createChannel'
+import ThankYou from "./components/ThankYou";
 
 class App extends React.Component {
 
@@ -31,6 +33,7 @@ class App extends React.Component {
                 <Route exact path="/" component={intro}/>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/channelChat" component={ChannelChat} />
+                <Route exact path="/createChannel" component={CreateChannel} />
                 <Route exact path="/directChat" component={DirectChat} />
                 <Route exact path="/selectRole" component={RoleSelectPage} />
                 <Route exact path="/selectAirport" component={AirportSelectPage} />
@@ -38,6 +41,7 @@ class App extends React.Component {
                 <Route exact path="/selectUserName" component={GetUserName}/>
                 <Route exact path="/selectEmail" component={GetEmail}/>
                 <Route exact path="/selectPassword" component={GetPassword}/>
+                <Route exact path="/thankYou" component={ThankYou}/>
                 {/*<Route exact path="/chat" component={Chat} />*/}
             </Router>
         </div>

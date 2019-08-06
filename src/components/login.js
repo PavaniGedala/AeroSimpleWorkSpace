@@ -21,10 +21,33 @@ class Login extends React.Component {
         loginUser(value.username,value.password,(res)=>{
             if(res.code=='auth/user-not-found'){
                 this.setState({error:'user doesnot exist'})
+            }else if(!res.code){
+                console.log(res);
+                let user=(res.user)
+                let uid=(user.uid)
+                localStorage.setItem('userData',JSON.stringify(user))
+                db.collection("users").where('uid','==',uid).onSnapshot(querySnapshot=>{
+                    const data = querySnapshot.docs.map(doc => {
+                        return  {
+                            data:doc.data(),
+                            id:doc.id
+                        }
+                    });
+                    console.log(data);
+                    localStorage.setItem('currentUserData',JSON.stringify(data[0]))
+                    this.props.history.push("/channelChat")
+                })
+
+
+
             }else{
-                this.props.history.push("/channelChat")
+                this.setState({error:res.message})
             }
         })
+    }
+
+    register=()=>{
+        this.props.history.push('/selectAirport');
     }
 
     submit(value){
@@ -59,6 +82,7 @@ class Login extends React.Component {
                 </div>
 
                 <div>
+                    <button onClick={this.register}>create account</button>
                     <button type="submit" disabled={pristine || submitting}>
                         Submit
                     </button>

@@ -1,23 +1,17 @@
 import React from 'react';
 import './common.css';
 
-class GetUserName extends React.Component {
+class ThankYou extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    changeText=(e)=>{
-        console.log(e.target.value)
-        sessionStorage.setItem('userName',e.target.value)
-
-    }
     continue=()=>{
-        this.props.history.push("/selectPhoto")
+        this.props.history.push("/login")
     }
     render() {
         return (
             <div className="chatChannel">
-                <input onChange={(e)=>this.changeText(e)}/>
                 <button onClick={this.continue}>Continue</button>
             </div>
         )
@@ -26,4 +20,4 @@ class GetUserName extends React.Component {
 }
 
 
-export default GetUserName;
+export default ThankYou;

@@ -27,6 +27,7 @@ class DirectChat extends React.Component {
             uid:'1234',
 
         }
+        console.log(json)
         db.collection("directChatMessages").doc(uuid()).set(json, { merge: true })
     }
     constructor(props){
@@ -51,7 +52,7 @@ class DirectChat extends React.Component {
         this.setState({messages:d})
     }
 
-    handleMessage(e){
+    handleMessage=(e)=>{
         this.setState({
             message:e
             }

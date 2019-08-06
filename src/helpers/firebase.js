@@ -51,13 +51,12 @@ export const loginUser=function (email,password,callback) {
         });
 }
 
-export const userAuth=function (callback) {
+export const userAuth=function (data,callback) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             user.updateProfile({
-                displayName: "Jane Q. User",
-                photoURL: "https://example.com/jane-q-user/profile.jpg",
-                customVar:'hai'
+                displayName: data.name,
+                photoURL: data.photo
             }).then(function() {
                 // Profile updated successfully!
                 // "Jane Q. User"
@@ -90,5 +89,7 @@ export const updateUserPhoto=function(photo,callback){
         }
     });
 }
+
+export const storage=firebase.storage().ref();
 
 export const db = firebase.firestore();

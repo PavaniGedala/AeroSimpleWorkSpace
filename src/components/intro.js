@@ -20,11 +20,16 @@ class Intro extends React.Component {
         this.props.history.push("/login")
     }
 
+    register=()=>{
+        this.props.history.push('/selectAirport');
+    }
+
     render(){
         return (
             <div className="Intro">
                 Intro page
                 <button onClick={this.login}>Signin</button>
+                <button onClick={this.register}>Signup</button>
             </div>
         );
     }
