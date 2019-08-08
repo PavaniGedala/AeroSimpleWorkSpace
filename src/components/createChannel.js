@@ -1,60 +1,91 @@
 import React from 'react';
 
 import './common.css';
-import {db} from '../helpers/firebase';
-import { BrowserRouter as Router, Route,withRouter } from 'react-router-dom';
-import {loginUser} from '../helpers/firebase'
+import { db } from '../helpers/firebase';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { loginUser } from '../helpers/firebase'
 import { Field, FieldArray, reduxForm, formValueSelector, change, untouch } from "redux-form";
 import { connect } from "react-redux";
-import {user} from '../stateManager/actions/user.action';
+import { user } from '../stateManager/actions/user.action';
 
 
 class CreateChannel extends React.Component {
-    state={
-        error:'',
-        users:[]
+    state = {
+        error: '',
+        users: [],
+        roles: [],
+        roles1: [],
+        userData: []
     }
-    constructor(props){
+    constructor(props) {
         super(props);
 
     }
 
-    componentDidMount=()=> {
+    componentDidMount = () => {
 
         db.collection("users")
-            .where('airport','==',JSON.parse(localStorage.getItem('currentUserData'))['data']['airport'])
+            .where('airport', '==', JSON.parse(localStorage.getItem('currentUserData'))['data']['airport'])
             .onSnapshot(querySnapshot => {
                 const data = querySnapshot.docs.map(doc => {
-                    return  {
-                        data:doc.data(),
-                        id:doc.id
+                    return {
+                        data: doc.data(),
+                        id: doc.id
                     }
                 });
                 console.log(data)
-                this.setState({roles:data})
+                this.setState({ roles: data })
+            });
+
+        db.collection("roles")
+            .onSnapshot(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => {
+                    return {
+                        data: doc.data(),
+                        id: doc.id
+                    }
+                });
+                console.log(data)
+                this.setState({ roles1: data })
             });
     }
 
-    login=(value)=>{
-        const json=value;
-        json['channelType']=this.state.type;
-        json['users']=[]
+    getUserRoles = (roles, users) => {
+        for (var i = 0; i < users.length; i++) {
+            roles.map(function (val, index) {
+                if (users[i].id === val.id) {
+                    users[i].data.roleName = val.data.roleName;
+                }
+            });
+            if ((users.length - 1) == i) {
+                debugger;
+                this.setState({ userData: users });
+                console.log(this.state);
+                return this.state.userData;
+            }
+        }
     }
 
-    register=()=>{
+    login = (value) => {
+        const json = value;
+        json['channelType'] = this.state.type;
+        json['users'] = []
+    }
+
+    register = () => {
         this.props.history.push('/selectAirport');
     }
 
-    changeType=(value)=> {
+    changeType = (value) => {
 
-        this.setState({'type':value})
+        this.setState({ 'type': value })
     }
 
-    submit(value){
+    submit(value) {
         console.log(value)
     }
 
-    render(){
+    render() {
         const { handleSubmit, pristine, reset, submitting } = this.props;
         const renderButtonSwitcher = props => {
             return (
@@ -97,11 +128,11 @@ class CreateChannel extends React.Component {
                         {/*    name="channelType"*/}
                         {/*    component="renderbuttonswitcher"*/}
                         {/*/>*/}
-                        <button onClick={()=>this.changeType('public')}>
-                            Public {this.state.type && this.state.type=='public' && <p>selected</p>}
+                        <button onClick={() => this.changeType('public')}>
+                            Public {this.state.type && this.state.type == 'public' && <p>selected</p>}
                         </button>
-                        <button onClick={()=>this.changeType('private')}>
-                            Private {this.state.type && this.state.type!='public' && <p>selected</p>}
+                        <button onClick={() => this.changeType('private')}>
+                            Private {this.state.type && this.state.type != 'public' && <p>selected</p>}
                         </button>
                     </div>
                 </div>
@@ -122,7 +153,7 @@ class CreateChannel extends React.Component {
 
 }
 
-CreateChannel=reduxForm({
+CreateChannel = reduxForm({
     form: 'createchannel' // a unique identifier for this form
 })(CreateChannel)
 
@@ -130,11 +161,11 @@ const selector = formValueSelector("createchannel");
 
 const mapStateToProps = (state, props) => {
 
-    const channelName=selector(state,"channelName");
-    const channelDescription=selector(state,"channelDescription");
-    const channelType=selector(state,"channelType");
+    const channelName = selector(state, "channelName");
+    const channelDescription = selector(state, "channelDescription");
+    const channelType = selector(state, "channelType");
     console.log(channelType);
-    return{
+    return {
         channelName,
         channelDescription,
         channelType
